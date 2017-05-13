@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>三子连珠棋--郑常龙</title>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="tick-tack-toe.css">
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="tick-tack-toe.js"></script>
+    <!-- HTML5 Shim 和 Respond.js 用于让 IE8 支持 HTML5元素和媒体查询 -->
+    <!--[if lt IE 9]>
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <div class="ctrl">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-8 col-lg-5 col-sm-offset-2 col-lg-offset-3">
+                    <div class="row center-block">
+                        <button id="stGame" class="btn-primary col-xs-4"><i class="glyphicon glyphicon-cog"></i>&nbsp;设置&nbsp;</button>
+                        <button id="snGame" class="btn-success col-xs-4"><i class="glyphicon glyphicon-volume-up"></i>&nbsp;音效&nbsp;</button>
+                        <button id="tpGame" class="btn-info col-xs-4"><i class="glyphicon glyphicon-bullhorn"></i>&nbsp;攻略&nbsp;</button>
+                    </div>
+                    <div class="row center-block">
+                        <button id="bkGame" class="btn-warning col-xs-6"><i class="glyphicon glyphicon-repeat"></i>&nbsp;悔棋&nbsp;</button>
+                        <button id="reGame" class="btn-danger col-xs-6"><i class="glyphicon glyphicon-refresh"></i>&nbsp;重玩&nbsp;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- BootStrap模态框（Modal）游戏首次开始或点击攻略时弹出此窗口，对游戏作简单介绍" -->
+    <div class="modal fade" id="tipModal" tabindex="-1" role="dialog" aria-labelledby="tipModal-Label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×
+                    </button>
+                    <h4 class="modal-title" id="tipModal-Label">
+                    游戏攻略
+                </h4>
+                </div>
+                <div class="modal-body">
+                    “三子棋”，又叫“九宫棋”，棋盘共9个位置, “我方”与“电脑”依次落子，任一方先实现“三子连珠”即为获胜！
+                    <br>
+                    <br>三字连珠有效位置:
+                    <br>横排123 456 789, 纵列147 258 369，斜线159 357
+                    <br>
+                    <br>预设“我方白棋”,“我方先走”,"音效开",可在“设置”中更改
+                </div>
+                <div class="modal-footer">
+                    <button id="tip-set" type="button" class="btn btn-primary col-xs-12">
+                        打开设置看看 ~
+                    </button>
+                    <button id="tip-yes" type="button" class="btn btn-success col-xs-6">
+                        理解，开始玩吧
+                    </button>
+                    <button id="tip-more" type="button" class="btn btn-danger col-xs-5">
+                        不是很明白 :(
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- BootStrap模态框（Modal）设置我方及电脑棋子颜色 -->
+    <div class="modal fade" id="chsClrModal" tabindex="-1" role="dialog" aria-labelledby="chsClrModal-Label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×
+                    </button>
+                    <h4 class="modal-title" id="chsClrModal-Label">
+                    设置-选棋
+                </h4>
+                </div>
+                <div class="modal-body">
+                    请选择你方棋子颜色 ?
+                </div>
+                <div class="modal-footer">
+                    <button id="chsWht" type="button" class="btn btn-success">
+                        我方白棋
+                    </button>
+                    <button id="chsBlk" type="button" class="btn btn-danger">
+                        我方黑棋
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- BootStrap模态框（Modal）设置我方及电脑棋手谁先走第一步 -->
+    <div class="modal fade" id="chsFstModal" tabindex="-1" role="dialog" aria-labelledby="chsFstModal-Label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×
+                    </button>
+                    <h4 class="modal-title" id="chsFstModal-Label">
+                    设置-谁先走棋
+                </h4>
+                </div>
+                <div class="modal-body">
+                    一般而言, 先走棋的一方获胜几率更大;
+                    <br>如果你对自己有信心, 可以挑战一下, 让电脑先走;
+                    <br>不用担心, 此项设置是随时可以更改的哦 :)
+                </div>
+                <div class="modal-footer">
+                    <button id="meFst" type="button" class="btn btn-success">
+                        我先走棋
+                    </button>
+                    <button id="pcFst" type="button" class="btn btn-danger">
+                        电脑先走棋
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- BootStrap模态框（Modal）设置音效开关 -->
+    <div class="modal fade" id="sndStModal" tabindex="-1" role="dialog" aria-labelledby="sndStModal-Label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×
+                    </button>
+                    <h4 class="modal-title" id="sndStModal-Label">
+                    设置-音效开关
+                </h4>
+                </div>
+                <div class="modal-body">
+                    请选择是否需要开启游戏音效 ?
+                </div>
+                <div class="modal-footer">
+                    <button id="sndSt-yes" type="button" class="btn btn-success">
+                        开启音效，更带感~
+                    </button>
+                    <button id="sndSt-no" type="button" class="btn btn-danger">
+                        嘘！上班偷着玩儿的，静音→_→
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- BootStrap模态框（Modal）提示"你赢了, 再来一盘?" -->
+    <div class="modal fade" id="myWinModal" tabindex="-1" role="dialog" aria-labelledby="myWinModal-Label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×
+                    </button>
+                    <h4 class="modal-title" id="myWinModal-Label">
+                    本轮战况
+                </h4>
+                </div>
+                <div class="modal-body">
+                    恭喜, 你赢了 ! 再来一盘 ?
+                </div>
+                <div class="modal-footer">
+                    <button id="myWin-upGame" type="button" class="btn btn-primary col-xs-12 noDisplay">
+                        挑战,让电脑先走!
+                    </button>
+                    <button id="myWin-reGame" type="button" class="btn btn-success col-xs-6">
+                        好,再续辉煌!
+                    </button>
+                    <button id="myWin-ndGame" type="button" class="btn btn-danger col-xs-5">
+                        不玩了,太简单!
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- BootStrap模态框（Modal）提示"你输了, 再来一盘?" -->
+    <div class="modal fade" id="pcWinModal" tabindex="-1" role="dialog" aria-labelledby="pcWinModal-Label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×
+                    </button>
+                    <h4 class="modal-title" id="pcWinModal-Label">
+                    本轮战况
+                </h4>
+                </div>
+                <div class="modal-body">
+                    很遗憾, 你输了 ! 再来一盘 ?
+                </div>
+                <div class="modal-footer">
+                    <button id="pcWin-reGame" type="button" class="btn btn-primary col-xs-12">
+                        重玩,继续挑战:)
+                    </button>
+                    <button id="pcWin-bkGame" type="button" class="btn btn-success col-xs-5">
+                        疏忽,我要悔棋!
+                    </button>
+                    <button id="pcWin-dnGame" type="button" class="btn btn-success noDisplay col-xs-5">
+                        不服,我先走棋!
+                    </button>
+                    <button id="pcWin-ndGame" type="button" class="btn btn-danger col-xs-6">
+                        不玩了,太伤人:(
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- BootStrap模态框（Modal）按了悔棋键但棋盘上已无我方棋子时弹窗提示 -->
+    <div class="modal fade" id="noBkModal" tabindex="-1" role="dialog" aria-labelledby="noBkModal-Label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×
+                    </button>
+                    <h4 class="modal-title" id="noBkModal-Label">
+                    悔棋无效提示
+                </h4>
+                </div>
+                <div class="modal-body">
+                    当前棋盘上已经没有我方棋子了, 无需悔棋~
+                </div>
+                <div class="modal-footer">
+                    <button id="noBk-ct" type="button" class="btn btn-primary">
+                        额看错, 接着玩 ~
+                    </button>
+                    <button id="noBk-re" type="button" class="btn btn-danger">
+                        重玩游戏 !
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- BootStrap模态框（Modal）提示"和棋了, 再来一盘?" -->
+    <div class="modal fade" id="tieModal" tabindex="-1" role="dialog" aria-labelledby="tieModal-Label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×
+                    </button>
+                    <h4 class="modal-title" id="tieModal-Label">
+                    本轮战况
+                </h4>
+                </div>
+                <div class="modal-body">
+                    哎哟不错哦, 和棋平局! 再来一盘 ?
+                </div>
+                <div class="modal-footer">
+                    <button id="tie-reGame" type="button" class="btn btn-success">
+                        继续, 决战到天亮 zzZZ
+                    </button>
+                    <button id="tie-ndGame" type="button" class="btn btn-danger">
+                        不玩儿了, 暴露智商啦 → →
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- BootStrap模态框（Modal）落子位置已经有其他棋子时提示"此坑已被占, 不能在此处落子哦~" -->
+    <div class="modal fade" id="invldModal" tabindex="-1" role="dialog" aria-labelledby="invldModal-Label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×
+                    </button>
+                    <h4 class="modal-title" id="invldModal-Label">
+                    落子位置无效提示
+                </h4>
+                </div>
+                <div class="modal-body">
+                    抱歉, 此坑已被占, 不能在此处落子哦~
+                </div>
+                <div class="modal-footer">
+                    <button id="invld-ct" type="button" class="btn btn-primary col-xs-12">
+                        额看错, 接着玩 ~
+                    </button>
+                    <button id="invld-bk" type="button" class="btn btn-success col-xs-6">
+                        我要悔棋 ←
+                    </button>
+                    <button id="invld-re" type="button" class="btn btn-danger col-xs-5">
+                        重玩游戏 !
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-lg-5 col-sm-offset-2 col-lg-offset-3">
+                <div class="row center-block">
+                    <table class="table bg col-xs-12">
+                        <tr>
+                            <td class="col-xs-4">
+                                <button id="btn1">1</button>
+                            </td>
+                            <td class="col-xs-4">
+                                <button id="btn2">2</button>
+                            </td>
+                            <td class="col-xs-4">
+                                <button id="btn3">3</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <button id="btn4">4</button>
+                            </td>
+                            <td>
+                                <button id="btn5">5</button>
+                            </td>
+                            <td>
+                                <button id="btn6">6</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <button id="btn7">7</button>
+                            </td>
+                            <td>
+                                <button id="btn8">8</button>
+                            </td>
+                            <td>
+                                <button id="btn9">9</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="records col-lg-5 col-lg-offset-3">
+                <div class="crtRecords">
+                    当前设定:&nbsp;<span class="numRecords" id="fstOpt">我方</span>先走&nbsp;&nbsp;&nbsp;&nbsp;我方
+                    <button id="mySide" class="wht sml"></button><span class="numRecords" id="myChesLeft">5</span>&nbsp;&nbsp;电脑
+                    <button id="pcSide" class="blk sml"></button><span class="numRecords" id="pcChesLeft">5</span>
+                </div>
+                <div class="hstRecords">
+                    历史战绩:&nbsp;&nbsp;总计<span class="numRecords" id="totalTimes">0</span>&nbsp;&nbsp;胜<span class="numRecords" id="myWinTimes">0</span>&nbsp;&nbsp;负<span class="numRecords" id="myLoseTimes">0</span>&nbsp;&nbsp;平<span class="numRecords" id="myTieTimes">0</span>&nbsp;
+                    <button id="sbmtRecords" class="btn btn-xs btn-success">炫耀战绩</button>
+                </div>
+                <p class="footer">
+                    <a target="_blank" href="https://www.mike652638.com/tick-tack-toe-code">欢迎访问"我的网站"查看本游戏源代码</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="soundEfct">
+        <audio id="myChsSnd" controls>
+            <source src="https://www.mike652638.com/projects/sound/tick-tack-toe/myChsSnd.mp3" type="audio/mpeg">
+        </audio>
+        <audio id="pcChsSnd" controls>
+            <source src="https://www.mike652638.com/projects/sound/tick-tack-toe/pcChsSnd.mp3" type="audio/mpeg">
+        </audio>
+        <audio id="winSnd" controls>
+            <source src="https://www.mike652638.com/projects/sound/tick-tack-toe/winSnd.mp3" type="audio/mpeg">
+        </audio>
+        <audio id="loseSnd" controls>
+            <source src="https://www.mike652638.com/projects/sound/tick-tack-toe/loseSnd.mp3" type="audio/mpeg">
+        </audio>
+        <audio id="tieSnd" controls>
+            <source src="https://www.mike652638.com/projects/sound/tick-tack-toe/tieSnd.mp3" type="audio/mpeg">
+        </audio>
+        <audio id="warnSnd" controls>
+            <source src="https://www.mike652638.com/projects/sound/tick-tack-toe/warnSnd.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+</body>
+
+</html>
