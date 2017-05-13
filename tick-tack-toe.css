@@ -1,0 +1,176 @@
+body {
+    background-color: #333333;
+}
+
+.bg {
+    background-color: #E3A64C;
+    border-collapse: collapse;
+    box-shadow: 5px 5px 10px #000;
+    filter: drop-shadow(10px 10px 15px #000);
+    /* height: 470px;
+        width: 470px; */
+    margin: 20px auto;
+}
+
+.bg-blue {
+    background-color: #5BC0DE;
+}
+
+.bg-yellow {
+    background-color: #E3A64C;
+}
+
+.bg td {
+    border: 2px solid #0593D1;
+    box-sizing: border-box;
+    height: 120px;
+    text-align: center;
+    cursor: pointer;
+}
+
+table button {
+    color: transparent;
+    display: none;
+    outline: none;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    /* IE 9 */
+    -moz-transform: translateY(-50%);
+    /* Firefox */
+    -webkit-transform: translateY(-50%);
+    /* Safari 和 Chrome */
+    -o-transform: translateY(-50%);
+    /* Opera */
+}
+
+
+/**隐藏棋子上的数字**/
+
+.wht {
+    background-color: #fff;
+    border-radius: 50%;
+    display: inline-block;
+    filter: drop-shadow(5px 5px 10px #000);
+    height: 50px;
+    width: 50px;
+}
+
+.blk {
+    background-color: #000;
+    border-radius: 50%;
+    display: inline-block;
+    filter: drop-shadow(5px 5px 10px #fff);
+    height: 50px;
+    width: 50px;
+}
+
+.ctrl {
+    color: #fff;
+    margin-top: 1em;
+    text-align: center;
+}
+
+.ctrl button {
+    font-size: 1.2em;
+    text-shadow: black 5px 3px 3px;
+    margin-bottom: 0.2em;
+}
+
+.modal-content {
+    background-color: rgba(5, 147, 209, 0.6);
+    color: #fff;
+    filter: drop-shadow(5px 5px 10px #000);
+    font-size: 1.2em;
+    margin: 100px auto;
+}
+
+@media only screen and (max-width: 330px) {
+    .records {
+        font-size: 0.9em !important;
+    }
+}
+
+@media only screen and (min-width: 760px) {
+    .records {
+        font-size: 1.4em !important;
+    }
+}
+
+@media screen and (min-width: 760px) and (max-width: 1020px) {
+    .modal-content {
+        left: 66px;
+        position: absolute;
+        width: 470px;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    .modal-content {
+        left: 20px;
+        position: absolute;
+        width: 460px;
+    }
+}
+
+#tipModal .modal-body,
+#chsFstModal .modal-body {
+    font-size: 1em;
+}
+
+.modal-footer {
+    text-align: center;
+}
+
+.modal-footer button {
+    font-size: 1em;
+}
+
+.modal-footer button:nth-child(1) {
+    margin: 0.6em auto;
+}
+
+.modal-footer button:nth-child(3),
+#pcWin-ndGame {
+    float: right;
+}
+
+.lstWinCls {
+    background-color: #E74C3C;
+}
+
+.records {
+    color: #fff;
+    font-size: 1em;
+    text-align: center;
+}
+
+.sml {
+    display: inline-block;
+    height: 20px;
+    outline: none;
+    width: 20px;
+}
+
+.numRecords {
+    color: #D9534F;
+    font-weight: bold;
+    padding: 6px;
+    text-decoration: underline;
+}
+
+.footer {
+    font-size: 1em;
+    padding-top: 1em;
+    text-align: center;
+}
+
+.footer a {
+    text-decoration: none;
+}
+
+.noDisplay,
+.soundEfct {
+    display: none;
+}
