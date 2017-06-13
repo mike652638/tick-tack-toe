@@ -48,4 +48,4 @@ This Demo is very simple since it's one of my practicing projects when learning 
 
 这个小页面是我自学前端时实践的一个小项目, 实现起来并不难, 您可以进入<a target="_blank" href = "https://www.mike652638.com/demo/tick-tack-toe.html">我的网站DEMO展示页-三子连珠棋</a>查看在线效果, 随时欢迎您提出任何问题, 建议或反馈 :) <br>
 
-<a target="_blank" href = "https://www.mike652638.com/demo/tick-tack-toe.html"><img src="https://www.mike652638.com/demo/tick-tack-toe/scrShts/tickScrSht-pc.png" alt="tick-tack-toe-screenshot" /></a>
+<a target="_blank" href = "https://www.mike652638.com/demo/tick-tack-toe.html"><img src="https://www.mike652638.com/demo/tick-tack-toe/scrShts/tickScrSht1-pc.png" alt="tick-tack-toe-screenshot" /></a>
