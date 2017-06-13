@@ -86,34 +86,6 @@ table button {
     margin: 100px auto;
 }
 
-@media only screen and (max-width: 330px) {
-    .records {
-        font-size: 0.9em !important;
-    }
-}
-
-@media only screen and (min-width: 760px) {
-    .records {
-        font-size: 1.4em !important;
-    }
-}
-
-@media screen and (min-width: 760px) and (max-width: 1020px) {
-    .modal-content {
-        left: 66px;
-        position: absolute;
-        width: 470px;
-    }
-}
-
-@media only screen and (min-width: 1200px) {
-    .modal-content {
-        left: 20px;
-        position: absolute;
-        width: 460px;
-    }
-}
-
 #tipModal .modal-body,
 #chsFstModal .modal-body {
     font-size: 1em;
@@ -148,9 +120,9 @@ table button {
 
 .sml {
     display: inline-block;
-    height: 20px;
+    height: 16px;
+    width: 16px;
     outline: none;
-    width: 20px;
 }
 
 .numRecords {
@@ -160,17 +132,57 @@ table button {
     text-decoration: underline;
 }
 
+.hstRecords {
+    margin-top: 6px;
+}
+
 .footer {
     font-size: 1em;
-    padding-top: 1em;
+    padding-top: 10px;
     text-align: center;
+    margin-left: -12px;
 }
 
 .footer a {
+    color: #00FFFF;
+    padding: 6px;
     text-decoration: none;
+}
+
+.footer a:hover {
+    color: #fff;
+    background-color: #0080FF;
 }
 
 .noDisplay,
 .soundEfct {
     display: none;
+}
+
+@media only screen and (max-width: 330px) {
+    .records {
+        font-size: 0.9em !important;
+    }
+}
+
+@media only screen and (min-width: 760px) {
+    .records {
+        font-size: 1.2em !important;
+    }
+}
+
+@media screen and (min-width: 760px) and (max-width: 1020px) {
+    .modal-content {
+        left: 66px;
+        position: absolute;
+        width: 470px;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    .modal-content {
+        left: 20px;
+        position: absolute;
+        width: 460px;
+    }
 }
